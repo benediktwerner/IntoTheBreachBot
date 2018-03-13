@@ -22,13 +22,13 @@
 
         public static void ProcessEnterCell(this Entity entity, Cell cell)
         {
-            if (!entity.IsFlying && !entity.IsMassive && cell.cellType == CellType.Water)
+            if (!entity.IsFlying && !entity.IsMassive && cell.CellType == CellType.Water)
                 entity.IsAlive = false;
-            else if (!entity.IsFlying && cell.cellType == CellType.Empty)
+            else if (!entity.IsFlying && cell.CellType == CellType.Empty)
                 entity.IsAlive = false;
-            else if (cell.modifiers.HasFlag(CellModifiers.Acid))
+            else if (cell.Modifiers.HasFlag(CellModifiers.Acid))
                 entity.IsPoisoned = true;
-            else if (cell.modifiers.HasFlag(CellModifiers.Fire))
+            else if (cell.Modifiers.HasFlag(CellModifiers.Fire))
                 entity.IsBurning = true;
         }
     }

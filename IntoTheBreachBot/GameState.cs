@@ -58,10 +58,10 @@ namespace IntoTheBreachBot
 
         public Entity GetEntityOnCell(Cell cell)
         {
-            if (cell.enemyIndex >= 0)
-                return Enemies[cell.enemyIndex];
-            else if (cell.mechIndex >= 0)
-                return Mechs[cell.mechIndex];
+            if (cell.EnemyIndex >= 0)
+                return Enemies[cell.EnemyIndex];
+            else if (cell.MechIndex >= 0)
+                return Mechs[cell.MechIndex];
             throw new InvalidOperationException("Cell does not contain an entity");
         }
 
@@ -89,12 +89,12 @@ namespace IntoTheBreachBot
                 else
                 {
                     entity.Damage(1);
-                    PowerGrid -= pushedCell.RecieveDamage(1, CellModifiers.None);
+                    PowerGrid -= pushedCell.Damage(1, CellModifiers.None);
                 }
             }
 
             entity.Damage(amount);
-            targetCell.RecieveDamage(amount, modifiers);
+            targetCell.Damage(amount, modifiers);
             entity.ProcessEnterCell(GetCell(entity.Position));
         }
     }

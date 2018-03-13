@@ -4,7 +4,7 @@ namespace IntoTheBreachBot
 {
     public enum CellType
     {
-        Empty, Plain, Water, Mountain, BrokenMountain, Forest, Dessert,
+        Empty, Plain, Water, Mountain, CrackedMountain, Forest, Dessert
     }
 
     [Flags]
@@ -19,62 +19,66 @@ namespace IntoTheBreachBot
 
     public struct Cell
     {
-        public CellType cellType;
-        public CellModifiers modifiers;
-        public int buildings;
-        public int mechIndex;
-        public int enemyIndex;
+        public CellType CellType;
+        public CellModifiers Modifiers;
+        public int Buildings;
+        public int MechIndex;
+        public int EnemyIndex;
     }
 
     public static class CellExtensionMethods
     {
         // Returns grid damage
-        public static int RecieveDamage(this Cell cell, int amount, CellModifiers modifiers)
+        public static int Damage(this Cell cell, int amount, CellModifiers modifiers = CellModifiers.None)
         {
             if (amount > 0)
             {
-                switch (cell.cellType)
+                switch (cell.CellType)
                 {
                     case CellType.Mountain:
-                        cell.cellType = CellType.BrokenMountain;
+                        cell.CellType = CellType.CrackedMountain;
                         break;
-                    case CellType.BrokenMountain:
-                        cell.cellType = CellType.Plain;
+                    case CellType.CrackedMountain:
+                        cell.CellType = CellType.Plain;
                         break;
                     case CellType.Forest:
-                        cell.cellType = CellType.Plain;
-                        cell.modifiers |= CellModifiers.Fire;
+                        cell.CellType = CellType.Plain;
+                        cell.Modifiers |= CellModifiers.Fire;
                         break;
                     case CellType.Dessert:
-                        cell.cellType = CellType.Plain;
-                        cell.modifiers |= CellModifiers.Smoke;
+                        cell.CellType = CellType.Plain;
+                        cell.Modifiers |= CellModifiers.Smoke;
                         break;
                 }
             }
 
-            int gridDamage = Math.Min(amount, cell.buildings);
-            cell.buildings -= gridDamage;
-            cell.modifiers |= modifiers;
+            int gridDamage = Math.Min(amount, cell.Buildings);
+            cell.Buildings -= gridDamage;
+            cell.Modifiers |= modifiers;
             return gridDamage;
         }
 
         public static bool HasEntity(this Cell cell)
         {
-            return cell.mechIndex < 0 && cell.enemyIndex < 0;
+            return cell.MechIndex >= 0 || cell.EnemyIndex >= 0;
         }
 
         public static bool IsWalkable(this Cell cell)
         {
-            switch (cell.cellType)
+            switch (cell.CellType)
             {
                 case CellType.Plain:
+                    return cell.Buildings == 0;
                 case CellType.Forest:
                 case CellType.Dessert:
                 case CellType.Water:
-                    return cell.buildings == 0;
-                default:
+                    return true;
+                case CellType.Empty:
+                case CellType.Mountain:
+                case CellType.CrackedMountain:
                     return false;
             }
+            throw new InvalidOperationException("Invalid cell type: " + cell.CellType);
         }
     }
 }
