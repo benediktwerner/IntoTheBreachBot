@@ -2,33 +2,6 @@
 
 namespace IntoTheBreachBot
 {
-    public struct Position
-    {
-        public int x, y;
-
-        public Position(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-
-        public Position(Position pos, int xDiff, int yDiff)
-        {
-            x = pos.x + xDiff;
-            y = pos.y + yDiff;
-        }
-
-        public static bool operator ==(Position p1, Position p2)
-        {
-            return p1.Equals(p2);
-        }
-
-        public static bool operator !=(Position p1, Position p2)
-        {
-            return !p1.Equals(p2);
-        }
-    }
-
     public enum CellType
     {
         Empty, Plain, Water, Mountain, BrokenMountain, Forest, Dessert,
