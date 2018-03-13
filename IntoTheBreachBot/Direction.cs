@@ -2,7 +2,7 @@
 {
     public enum Direction
     {
-        North, East, South, West, None = -1
+        None = -1, North, East, South, West
     }
 
     public static class DirectionExtensionMethods
