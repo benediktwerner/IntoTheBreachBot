@@ -29,13 +29,13 @@ namespace IntoTheBreachBot
             {
                 case MechAction.ActionType.Attack:
                     mech.ExecuteAttack(this, action);
-                    mech.HasActed = true;
+                    mech.HasShot = true;
                     break;
 
                 case MechAction.ActionType.Repair:
                     if (mech.Health < mech.MaxHealth)
                         mech.Health++;
-                    mech.HasActed = true;
+                    mech.HasShot = true;
                     break;
 
                 case MechAction.ActionType.Move:
