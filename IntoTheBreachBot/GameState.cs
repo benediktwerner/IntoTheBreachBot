@@ -53,7 +53,7 @@ namespace IntoTheBreachBot
 
         public Cell GetCell(Position pos)
         {
-            return Board[pos.x + pos.y * 8];
+            return Board[(int) pos];
         }
 
         public Entity GetEntityOnCell(Cell cell)
@@ -69,7 +69,10 @@ namespace IntoTheBreachBot
         {
             Cell targetCell = GetCell(targetPosition);
             if (!targetCell.HasEntity())
+            {
+                targetCell.Damage(amount, modifiers);
                 return;
+            }
 
             Entity entity = GetEntityOnCell(targetCell);
 
@@ -81,6 +84,7 @@ namespace IntoTheBreachBot
                 {
                     Entity otherEntity = GetEntityOnCell(pushedCell);
                     otherEntity.Damage(1);
+                    entity.Damage(1);
                 }
                 else if (pushedCell.IsWalkable())
                 {
@@ -89,13 +93,13 @@ namespace IntoTheBreachBot
                 else
                 {
                     entity.Damage(1);
-                    PowerGrid -= pushedCell.Damage(1, CellModifiers.None);
+                    PowerGrid -= pushedCell.Damage(1);
                 }
             }
 
             entity.Damage(amount);
             targetCell.Damage(amount, modifiers);
-            entity.ProcessEnterCell(GetCell(entity.Position));
+            entity.ProcessEnterCell(GetCell(entity.Position)); // Handles water, fire, acid, etc.
         }
     }
 }

@@ -16,6 +16,16 @@
             y = pos.y + yDiff;
         }
 
+        public static explicit operator Position(System.Int32 i)
+        {
+            return new Position(i % 8, i / 8);
+        }
+
+        public static explicit operator System.Int32(Position p)
+        {
+            return p.y * 8 + p.x;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Position && this == (Position)obj;
