@@ -29,17 +29,17 @@
             switch (mech.Weapon)
             {
                 case Weapon.Punch:
-                    gameState.Damage(action.targetPosition, 2, mech.Position.DirectionTo(action.targetPosition));
+                    gameState.Damage(action.TargetPosition, 2, mech.Position.DirectionTo(action.TargetPosition));
                     break;
                 case Weapon.Shoot:
-                    gameState.Damage(action.targetPosition, 1, mech.Position.DirectionTo(action.targetPosition));
+                    gameState.Damage(action.TargetPosition, 1, mech.Position.DirectionTo(action.TargetPosition));
                     break;
                 case Weapon.Artillery:
-                    gameState.Damage(action.targetPosition, 1);
-                    gameState.Damage(new Position(action.targetPosition, 0, -1), 0, Direction.North);
-                    gameState.Damage(new Position(action.targetPosition, 1, 0), 0, Direction.East);
-                    gameState.Damage(new Position(action.targetPosition, 0, 1), 0, Direction.South);
-                    gameState.Damage(new Position(action.targetPosition, -1, 0), 0, Direction.West);
+                    gameState.Damage(action.TargetPosition, 1);
+                    gameState.Damage(new Position(action.TargetPosition, 0, -1), 0, Direction.North);
+                    gameState.Damage(new Position(action.TargetPosition, 1, 0), 0, Direction.East);
+                    gameState.Damage(new Position(action.TargetPosition, 0, 1), 0, Direction.South);
+                    gameState.Damage(new Position(action.TargetPosition, -1, 0), 0, Direction.West);
                     break;
             }
         }

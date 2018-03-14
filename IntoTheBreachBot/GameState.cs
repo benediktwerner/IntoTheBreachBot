@@ -23,23 +23,23 @@ namespace IntoTheBreachBot
 
         public void ExecuteAction(MechAction action)
         {
-            var mech = Mechs[action.mechIndex];
+            var mech = Mechs[action.MechIndex];
 
-            switch (action.actionType)
+            switch (action.ActionType)
             {
-                case MechAction.ActionType.Attack:
+                case ActionType.Attack:
                     mech.ExecuteAttack(this, action);
                     mech.HasShot = true;
                     break;
 
-                case MechAction.ActionType.Repair:
+                case ActionType.Repair:
                     if (mech.Health < mech.MaxHealth)
                         mech.Health++;
                     mech.HasShot = true;
                     break;
 
-                case MechAction.ActionType.Move:
-                    mech.Position = action.targetPosition;
+                case ActionType.Move:
+                    mech.Position = action.TargetPosition;
                     mech.HasMoved = true;
                     break;
             }
