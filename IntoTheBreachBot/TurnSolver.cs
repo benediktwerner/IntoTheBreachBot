@@ -15,7 +15,7 @@ namespace IntoTheBreachBot
         {
             this.gameState = gameState;
             NextAction();
-            return bestActions.ToArray();
+            return bestActions;
         }
 
         void NextAction()
@@ -51,10 +51,16 @@ namespace IntoTheBreachBot
             }
         }
 
-        List<MechAction> GetAvailableActions(Mech mech)
+        IEnumerable<MechAction> GetAvailableActions(Mech mech)
         {
+            if (mech.HasShot)
+                return Enumerable.Empty<MechAction>();
+
+            var actions = new List<MechAction>();
+
             // TODO
-            return null;
+
+            return actions;
         }
     }
 }
