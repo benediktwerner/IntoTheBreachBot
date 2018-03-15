@@ -34,6 +34,8 @@ namespace IntoTheBreachBot
                 {
                     bestActionsScore = score;
                     bestActions = actions.ToArray();
+
+                    // TODO: Compute best possible score and break if that score was reached (Exception if surpassed!!)
                 }
                 return;
             }
@@ -58,7 +60,17 @@ namespace IntoTheBreachBot
 
             var actions = new List<MechAction>();
 
-            // TODO
+            /*
+             * TODO
+             *
+             * For movement:
+             *  - Add an additional "waklable map" field to GameState that gets updated when actions are executed
+             *  - Keep possible movements for a given "walkable map" and mech position in a hash map
+             *  - If not already in hash map, calculate movement options and add them to the hash map
+             *
+             * For combat:
+             *  - Only consider cells that have an effect when shot (e.g. forest, enemy on, enemy gets pushed, etc.)
+             */
 
             return actions;
         }

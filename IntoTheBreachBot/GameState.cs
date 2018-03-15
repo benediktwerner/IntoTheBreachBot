@@ -45,9 +45,29 @@ namespace IntoTheBreachBot
             }
         }
 
+        const int SCORE_GAME_OVER = -1000;
+
         public int ComputeEndOfTurn()
         {
-            // TODO
+            /*
+             * TODO: Simulate End of Turn
+             *  1. Fire Damage
+             *  (2. Environment, pass as argument)
+             *  3. Vek Attack (in order of array, check if alive)
+             *  4. Vek Spawning
+             */
+
+            if (PowerGrid <= 0)
+                return SCORE_GAME_OVER;
+
+            /*
+             * TODO: Score factors (in order of importance):
+             *  (- Subgoals, pass as argument)
+             *  - Power Grid
+             *  - Vek Alive and Vek HP
+             *  - Mech HP
+             */
+
             return 0;
         }
 
